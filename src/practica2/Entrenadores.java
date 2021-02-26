@@ -84,7 +84,7 @@ public class Entrenadores {
         }
         
     }
-      public void MostrarDatos(){
+      public int MostrarDatos(){
         // En este caso, estamos mostrando la informacion necesaria del objeto
         // podemos acceder a la informacion de la persona y de su arreglo de Carros por medio de un recorrido
           //System.out.print(idEntrenador+ " ");
@@ -93,7 +93,9 @@ public class Entrenadores {
             System.out.print(pokeballs[j].getIdd()+ " ");
             
             //System.out.println(pokemones[j].getNombre());
+            return pokeballs[j].getIdd();
         }
+        return 0;
     }
     
 
