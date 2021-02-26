@@ -30,6 +30,15 @@ public class Pokemon {
 
     }
 
+    
+    
+
+    public Pokemon(int id) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+    
+
     public int getId() {
         return id;
     }
