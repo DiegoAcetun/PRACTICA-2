@@ -3,6 +3,7 @@ package practica2;
 
 public class PokeBall {
     private int id;
+    
     private int idd;
     private String tipo;
     private int idPokemon;
@@ -20,12 +21,13 @@ public class PokeBall {
     }
     
 
-    public PokeBall(int idd, String nombrepokemon, int id) {
+    public PokeBall(int idd, String nombrepokemon, int id, String tipo) {
         this.idd = idd;
         this.pokemones = new Pokemon[150];
         this.contador = 0;
         this.nombrepokemon = nombrepokemon;
         this.id = id;
+        this.tipo = tipo;
         
     }
 
@@ -68,7 +70,9 @@ public class PokeBall {
         // En este caso, estamos mostrando la informacion necesaria del objeto
         // podemos acceder a la informacion de la persona y de su arreglo de Carros por medio de un recorrido
           System.out.print(idd+ " ");
-          System.out.print(nombrepokemon);
+          System.out.print(nombrepokemon+" ");
+          //System.out.print(id+" ");
+          System.out.print(tipo+" ");
         for (int j = 0; j < contador; j++) {
             System.out.print(" "+pokemones[j].getId() );
             //System.out.println(pokemones[j].getNombre());

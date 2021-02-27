@@ -12,6 +12,7 @@ public class PRACTICA2 {
 
     public static String arreglo[];
     static int id;
+    static int contadorPokemon;
     static Pokemon[] array_NombrePokemon;
     static int contadorE;
     static int o;
@@ -43,6 +44,8 @@ public class PRACTICA2 {
     static int i, j, k, h, y, g, v, z, contadorIDAsiganar;
     static int opcion;
     static boolean valido;
+    static int idPoke;
+    static String tipoPokemon;
 
     public static void main(String[] args) {
 
@@ -106,7 +109,7 @@ public class PRACTICA2 {
                     System.out.println("5. Cargar Alimentos");
                     System.out.println("6. Asignar pokemon sus pokeballs");
                     System.out.println("7. Asignar Pokeball a entrenadores");
-                    System.out.println("8. Asignar Actividad de comida");
+                    System.out.println("8. CAPTURADO");
                     System.out.println("9. Asignar actividad de pelea");
                     System.out.println("10. Generar Reportes");
                     System.out.println("11. Salir");
@@ -150,9 +153,12 @@ public class PRACTICA2 {
                         case 7:
                             archivos_AsignarPokeballs();
                             break;
-
+                        case 8:
+                            capturado();
+                            break;
                         case 10:
                             ReporteEntrenador();
+                            ReportePokemonSalvajes();
                             break;
                         case 11:
                             System.out.println("El programa finlaizó");
@@ -162,6 +168,7 @@ public class PRACTICA2 {
 
                 }
             } catch (Exception e) {
+                //e.printStackTrace();
                 System.out.println("Ingrese una opcion valida ");
                 valido = false;
             }
@@ -238,6 +245,7 @@ public class PRACTICA2 {
                     //System.out.println("");
 
                 }
+                contadorPokemon = i;
 
                 if (i < 150) {
                     for (m = i; m < 150; m++) {
@@ -594,12 +602,14 @@ public class PRACTICA2 {
                     for (p = 0; p < 150; p++) {
                         if (idPokemon == array_Pokemon[p].getId()) {
                             NombrePokemon = array_Pokemon[p].getNombre();
+                            idPoke = array_Pokemon[p].getId();
+                            tipoPokemon = array_Pokemon[p].getTipo();
                         }
                     }
                     for (i = i; i <= h; i++) {
 
                         array_AsignarPokemon[i - 1] = new Pokemon(idPokemon);
-                        array_AsignarPokeball[i - 1] = new PokeBall(idPokeball, NombrePokemon, 0);
+                        array_AsignarPokeball[i - 1] = new PokeBall(idPokeball, NombrePokemon, idPoke, tipoPokemon);
 
                         array_AsignarPokeball[i - 1].asignarPokemon(array_AsignarPokemon[i - 1]);
                         array_AsignarPokeball[i - 1].MostrarDatos();
@@ -680,7 +690,7 @@ public class PRACTICA2 {
                     for (i = i; i <= h; i++) {
 
                         array_AsignarPokeballEntrenador[i - 1] = new Entrenadores(idEntrenador);
-                        array_AsignarPokeballE[i - 1] = new PokeBall(idPokeballA, NombrePokemon, 0);
+                        array_AsignarPokeballE[i - 1] = new PokeBall(idPokeballA, NombrePokemon, idPoke, tipoPokemon);
 
                     }
                     h++;
@@ -708,7 +718,9 @@ public class PRACTICA2 {
                             for (j = 0; j < o - 1; j++) {
 
                                 if (array_AsignarPokeball[j].getIdd() == array_AsignarPokeballE[y].getIdd()) {
-                                    System.out.println(array_AsignarPokeball[j].getNombrepokemon());
+                                    System.out.print(array_AsignarPokeball[j].getNombrepokemon() + " ");
+                                    System.out.print(array_AsignarPokeball[j].getId() + " ");
+                                    System.out.println(array_AsignarPokeball[j].getTipo() + " ");
                                     break;
 
                                     //}
@@ -738,6 +750,24 @@ public class PRACTICA2 {
 
     }
 
+    public static void capturado() {
+        for (g = 0; g < 150; g++) {
+
+            for (y = 0; y < o - 1; y++) {
+                if (array_Pokemon[g].getId() == array_AsignarPokeball[y].getId()) {
+
+                    array_Pokemon[g].setCapturado(true);
+                }
+            }
+        }
+        System.out.println("Los Salvajes son: ");
+        for (j = 0; j < contadorPokemon; j++) {
+            if (array_Pokemon[j].isCapturado() == false) {
+                System.out.println(array_Pokemon[j].getId() + " " + array_Pokemon[j].getNombre());
+            }
+        }
+    }
+
     public static void ReporteEntrenador() {
         // FileWriter: para crear archivos
         FileWriter fichero = null;
@@ -750,52 +780,182 @@ public class PRACTICA2 {
             pw = new PrintWriter(fichero);
 
             pw.println("<HTML>");
-            pw.println("<title> REPORTE ENTRENADORES </title>");
-            pw.println("<body style=\"background-color: #E6E6FA;\">");
+            pw.println("<center> <title>   REPORTE ENTRENADORES </title> ");
+            pw.println("<body style=\"background-color: #154360 ;\">");
 
-            pw.println("<h3> ENTRENADORES: </h3>");
+            pw.println("<h3> <font color=\"#F1948A\">  REPORTE ENTRENADORES: </h3> </font>");
 
-            pw.println("<table class=\"default\">");
-
+            
+            
+            
+            
+            
+            
             for (g = 0; g < contadorE; g++) {
-
-                pw.print("<H3>"+"El entrenador " + array_Entrenadores[g].getNombre() + " id " + array_Entrenadores[g].getId() + " tiene las pokebolas: " + "</H3>"+"<br>");
-
+           //pw.print("<font color=\"#FFFF00\">");
+           pw.println("<table border =\"1\">");
+           
+           pw.print("<H3> <font color=\"#FFFFFF\">" + "El entrenador " + array_Entrenadores[g].getNombre() + " id " + array_Entrenadores[g].getId() + " tiene las pokeball: " + "</H3>" + "<br>");
                 
-                
+           //pw.print("</font>");
+           
+            
+            pw.print("<thead>");
+
+            pw.print("<tr>");
+            
+            pw.print("<th> <font color=\"edff21\"> Id Pokeball </th>");
+            pw.print("<th> <font color=\"edff21\"> Id Pokemon </th>");
+            pw.print("<th> <font color=\"edff21\">  Nombre Pokemon </th>");
+            pw.print("<th> <font color=\"edff21\">  Tipo Pokemon </th>");
+            
+
+            pw.print("</tr>");
+
+            pw.print("</thead>");
 
                 for (y = 0; y < 150; y++) {
                     if (array_Entrenadores[g].getId() == array_AsignarPokeballEntrenador[y].getIdEntrenador()) {
-                        array_AsignarPokeballEntrenador[y].asignarPokeball(array_AsignarPokeballE[y]);
 
-                        pw.print("Pokeball id "+array_AsignarPokeballEntrenador[y].MostrarDatos() + " ");
+                        array_AsignarPokeballEntrenador[y].asignarPokeball(array_AsignarPokeballE[y]);
+                        pw.print("<tr>");
+                        pw.print("<font color=\"#00FF00\">");
+                        pw.print("<td> <font color=\"#00FF00\">" + array_AsignarPokeballEntrenador[y].MostrarDatos() + "</td> ");
 
                         for (j = 0; j < o - 1; j++) {
 
                             if (array_AsignarPokeball[j].getIdd() == array_AsignarPokeballE[y].getIdd()) {
-                                pw.println("Contiene al pokemon "+array_AsignarPokeball[j].getNombrepokemon() + "<br>");
+                    //pw.println("Contiene al pokemon id " + array_AsignarPokeball[j].getId() + " Nombre " + array_AsignarPokeball[j].getNombrepokemon() + " tipo " + array_AsignarPokeball[j].getTipo() + "<br>" + "</font>");
+                                
+                                
+                        pw.print("<td> <font color=\"#00FF00\">" + array_AsignarPokeball[j].getId() + "</td> ");
+                         pw.print("<td> <font color=\"#00FF00\">" + array_AsignarPokeball[j].getNombrepokemon()+ "</td> ");
+                          pw.print("<td> <font color=\"#00FF00\">" + array_AsignarPokeball[j].getTipo()+ "</td> ");
+                           
+                             pw.print("</tr>");
+                                
+                                
                                 break;
 
                                 //}
+                                
+                             
                             }
                         }
 
                     }
 
                 }
-                pw.println(" ");
+                
+            }
+            /*for (g = 0; g < contadorE; g++) {
+                    System.out.print("El entrenador " + array_Entrenadores[g].getNombre() + " id " + array_Entrenadores[g].getId() + " tiene las pokebolas: ");
+                    System.out.println("");
+                    for (y = 0; y < 150; y++) {
+                        if (array_Entrenadores[g].getId() == array_AsignarPokeballEntrenador[y].getIdEntrenador()) {
+                            array_AsignarPokeballEntrenador[y].asignarPokeball(array_AsignarPokeballE[y]);
+
+                            array_AsignarPokeballEntrenador[y].MostrarDatos();
+
+                            for (j = 0; j < o - 1; j++) {
+
+                                if (array_AsignarPokeball[j].getIdd() == array_AsignarPokeballE[y].getIdd()) {
+                                    System.out.print(array_AsignarPokeball[j].getNombrepokemon() + " ");
+                                    System.out.print(array_AsignarPokeball[j].getId() + " ");
+                                    System.out.println(array_AsignarPokeball[j].getTipo() + " ");
+                                    break;
+
+                                    //}
+                                }
+                            }
+
+                        }
+
+                    }
+                    System.out.println(" ");
+                }*/
+
+           
+            pw.println("</table>");
+            pw.println("</center> ");
+            System.out.println("REPORTE ENTRENADORES GENERADOS ");
+        } catch (Exception e) {
+            System.out.println("No hay entrenadores ");
+
+        } finally {
+            try {
+
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                System.out.println("No hay entrenadores cargados");
+            }
+        }
+    }
+
+    public static void ReportePokemonSalvajes() {
+        // FileWriter: para crear archivos
+        FileWriter fichero = null;
+        // PrintWritter: para escribir
+        PrintWriter pw = null;
+        try {
+
+            fichero = new FileWriter("REPORTE POKEMONSALVAJES.HTML");
+
+            pw = new PrintWriter(fichero);
+
+            pw.println("<HTML>");
+            pw.println("<center> <title>   REPORTE POKEMONSALVAJES </title> ");
+            pw.println("<body style=\"background-color: #154360 ;\">");
+
+            pw.println("<h3> <font color=\"#F1948A\">  REPORTE POKEMON SALVAJES: </h3> </font>");
+
+            for (g = 0; g < 150; g++) {
+
+                for (y = 0; y < o - 1; y++) {
+                    if (array_Pokemon[g].getId() == array_AsignarPokeball[y].getId()) {
+
+                        array_Pokemon[g].setCapturado(true);
+                    }
+                }
+            }
+            pw.println("<table border =\"1\">");
+            pw.print("<H3><font color=\"#FFFF00\"> Los Pokemon Salvajes son: </font> </H3>");
+            pw.print("<thead>");
+
+            pw.print("<tr>");
+            pw.print("<th> <font color=\"edff21\"> ID </th>");
+            pw.print("<th> <font color=\"edff21\"> Nombre </th>");
+            pw.print("<th> <font color=\"edff21\">  Tipo </th>");
+            pw.print("<th> <font color=\"edff21\">  Vida </th>");
+            pw.print("<th> <font color=\"edff21\"> Puntos de ataque </th>");
+
+            pw.print("</tr>");
+
+            pw.print("</thead>");
+            for (j = 0; j < contadorPokemon; j++) {
+
+                if (array_Pokemon[j].isCapturado() == false) {
+                    pw.print("<tr>");
+
+                    pw.print("<td> <font color=\"#00FF00\">" + array_Pokemon[j].getId() + "</td>");
+                    
+                    pw.print("<td> <font color=\"#00FF00\">" + array_Pokemon[j].getNombre()+ "</td>");
+                    pw.print("<td> <font color=\"#00FF00\">" + array_Pokemon[j].getTipo()+ "</td>");
+                    pw.print("<td> <font color=\"#00FF00\">" + array_Pokemon[j].getVida()+ "</td>");
+                    pw.print("<td> <font color=\"#00FF00\">" + array_Pokemon[j].getPuntos_de_ataque()+ "</td>");
+                    
+                    pw.print("</tr>");
+                    
+//pw.print("<font color=\"#00FF00\">" + array_Pokemon[j].getId() + " " + array_Pokemon[j].getNombre() + " " + array_Pokemon[j].getTipo() + " " + array_Pokemon[j].getVida() + " " + array_Pokemon[j].getPuntos_de_ataque() + "<br>" + "</font>");
+                }
+
             }
 
-            /*for (int i = 0; i < MatrizA.length; i++) {
-                pw.println("<tr>");
-                for (int j = 0; j < MatrizA[i].length; j++) {
-                    pw.println("<td>" + "[" + MatrizA[i][j] + "]" + "</td>");
-                }
-                pw.println("</tr>");
-            }*/
             pw.println("</table>");
-
-            System.out.println("REPORTE ENTRENADORES GENERADOS ");
+            pw.println("</center> ");
+            System.out.println("REPORTE POKEMON SALVAJE GENERADO ");
         } catch (Exception e) {
             System.out.println("No hay entrenadores ");
 

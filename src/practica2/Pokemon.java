@@ -67,6 +67,34 @@ public class Pokemon {
         return estado;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setVida(Double vida) {
+        this.vida = vida;
+    }
+
+    public void setPuntos_de_ataque(Double puntos_de_ataque) {
+        this.puntos_de_ataque = puntos_de_ataque;
+    }
+
+    public void setCapturado(boolean capturado) {
+        this.capturado = capturado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
    
     
 
