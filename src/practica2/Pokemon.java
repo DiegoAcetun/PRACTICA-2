@@ -19,6 +19,14 @@ public class Pokemon {
 
     }
 
+    public Pokemon(int id, String nombre, Double vida, Double puntos_de_ataque) {
+        this.id = id;
+        this.nombre = nombre;
+        this.vida = vida;
+        this.puntos_de_ataque = puntos_de_ataque;
+    }
+    
+
     public Pokemon(int id, String tipo, String nombre, Double vida, Double puntos_de_ataque, boolean capturado, boolean estado) {
         this.id = id;
         this.tipo = tipo;
@@ -29,6 +37,12 @@ public class Pokemon {
         this.estado = estado;
 
     }
+
+    public Pokemon(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+    
 
     
     
